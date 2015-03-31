@@ -84,8 +84,8 @@ angular.module('myApp', [
 
 
       .when('/directive/table-accordion', {
-        controller: 'TableAccordionCtrl',
-        templateUrl: 'table-server-side/complete.html',
+        controller: 'TableServerSideCompleteCtrl',//'TableAccordionCtrl',
+        templateUrl: 'table-accordion/complete-accordion.html',
         title: '#ngTasty - AngularJS server side table directive'
       })
 

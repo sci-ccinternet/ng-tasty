@@ -1,0 +1,59 @@
+<%= include ../title-inside.html %>
+<%= include page-header.html %>
+<div class="row">
+  <%= include docs-head.html %>
+
+  <div class="col-md-12 docs-body">
+    <div class="example">
+      <div tasty-table bind-resource-callback="getResourceOne"> 
+        <table class="table table-striped table-condensed">
+          <thead tasty-thead bind-not-sort-by="notSortBy"></thead>
+          <tbody>
+            <tr ng-repeat="row in rows">
+              <td>{{ row.name }}</td>
+              <td>{{ row.star }}</td>
+              <td>{{ row['sf-location'] }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <pre>Api url : {{ urlApiOne }}</pre>
+      <pre>params : {{ paramsOne  }}</pre>
+      <pre>paramsObj : {{ paramsObjOne  }}</pre>
+    </div>
+    <tabset class="code">
+      <tab heading="Markup">
+        <pre ng-non-bindable><code data-language="html">&lt;div tasty-table bind-resource-callback=&quot;getResource&quot;&gt;
+  &lt;table class=&quot;table table-striped table-condensed&quot;&gt;
+    &lt;thead tasty-thead bind-not-sort-by=&quot;notSortBy&quot;&gt;&lt;/thead&gt;
+    &lt;tbody&gt;
+      &lt;tr ng-repeat=&quot;row in rows&quot;&gt;
+        &lt;td&gt;&lbrace;&lbrace; row.name &rbrace;&rbrace;&lt;/td&gt;
+        &lt;td&gt;&lbrace;&lbrace; row.star &rbrace;&rbrace;&lt;/td&gt;
+        &lt;td&gt;&lbrace;&lbrace; row['sf-location'] &rbrace;&rbrace;&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+&lt;/div&gt;</code></pre>
+      </tab>
+      <tab heading="JavaScript">
+        <pre><code data-language="javascript">$scope.notSortBy = ['sf-location'];
+
+$scope.getResource = function (params, paramsObj) {
+  var urlApi = 'table.json?' + params;
+  return $http.get(urlApi).then(function (response) {
+    return {
+      'rows': response.data.rows,
+      'header': response.data.header,
+      'sortBy': response.data['sort-by'],
+      'sortOrder': response.data['sort-order']
+    }
+  });
+}</code></pre>
+      </tab>
+      <tab heading="Response">
+        <pre><code data-language="javascript" ng-bind="responseTwo"></code></pre>
+      </tab>
+    </tabset>
+  </div>
+</div>
